@@ -27,6 +27,12 @@
     <ClInclude Include="vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="polynomial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="point.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +45,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="vector.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="polynomial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="point.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

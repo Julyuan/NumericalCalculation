@@ -149,12 +149,16 @@
     <ClInclude Include="matrix.h" />
     <ClInclude Include="matrixtest.h" />
     <ClInclude Include="NAlib.h" />
+    <ClInclude Include="point.h" />
+    <ClInclude Include="polynomial.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix.cpp" />
     <ClCompile Include="NAlib.cpp" />
+    <ClCompile Include="point.cpp" />
+    <ClCompile Include="polynomial.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
