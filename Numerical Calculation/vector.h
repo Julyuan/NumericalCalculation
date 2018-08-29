@@ -8,6 +8,7 @@ public:
 	Vector();
 	Vector(double a[], int dim);
 	Vector(Vector& other);
+	Vector(char* str);
 	Vector(int dim);
 	~Vector() {
 		delete[] vec;
