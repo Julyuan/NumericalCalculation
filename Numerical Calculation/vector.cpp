@@ -27,6 +27,10 @@ Vector::Vector(Vector& other) {
 	*this = other;
 }
 
+Vector::Vector(char * str)
+{
+}
+
 void Vector::SetAllElementsZero()
 {
 	for (int i = 0; i < dimension; i++)
