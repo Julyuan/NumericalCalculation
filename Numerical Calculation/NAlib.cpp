@@ -465,3 +465,29 @@ bool IsZero(double a)
 	return a*a < ZERO;
 }
 
+int PolynomialConvertAuxiliary(double x[], bool vis[], int total, double * res, int n, int current, int guard)
+{
+	if (current + total - 1 - guard < n)
+		return 1;
+	if (current == n) {
+		double sum = 1.0;
+		for (int i = 0; i < total; i++) {
+			if (vis) {
+				sum *= x[i];
+			}
+		}
+		*res += n % 2 == 0 ? sum : -sum;
+		return 1;
+	}
+	else {
+		for (int i = guard; i < total; i++) {
+			if (!vis[i]) {
+				vis[i] = 1;
+				PolynomialConvertAuxiliary(x,vis,total, res, n,current+1,i+1);
+				vis[i] = 0;
+			}			
+		}
+	}
+	return 1;
+}
+

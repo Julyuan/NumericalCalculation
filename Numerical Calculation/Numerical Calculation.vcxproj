@@ -147,8 +147,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="matrix.h" />
-    <ClInclude Include="matrixtest.h" />
+    <ClInclude Include="matrixtest.hpp" />
     <ClInclude Include="NAlib.h" />
+    <ClInclude Include="NAlibtest.hpp" />
     <ClInclude Include="point.h" />
     <ClInclude Include="polynomial.h" />
     <ClInclude Include="vector.h" />

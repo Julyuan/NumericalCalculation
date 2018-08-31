@@ -42,8 +42,10 @@ Polynomial::Polynomial(double zero_points[], int n) {
 	double* a = new double[n];
 
 	for (int iter = 0; iter <= n; iter++) {
-
+		a[iter] = 0.0;
 	}
+
+
 }
 
 

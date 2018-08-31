@@ -35,7 +35,7 @@ double Differential(char Expression[], double x);
 //求函数在一个区间积分的函数 
 double Integral(char Expression[], double start, double end);
 //利用二分法求函数的零点 
-double Bisection(char Expression[], double a, double b, double eps, double N);
+double Bisection(char Expression[], double a, double b, double eps, int N);
 //利用不动点法求函数的零点
  double FixedPoint(char Expression[], double x, double eps, int N); 
 //利用牛顿法求函数的零点
@@ -48,7 +48,9 @@ double Steffensen(char Expression[], double p0, double eps, int N);
 int GaussElimination(double** mat, int row, int column); 
 //高斯若当方法
 int GaussJordanMethod(double** a, int row, int column);
-
+//判断一个数是否为零
 bool IsZero(double a);
+//多项式转化的辅助函数
+int PolynomialConvertAuxiliary(double x[], bool vis[], int total, double* res, int n, int current, int guard);
 
 #endif

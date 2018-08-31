@@ -18,9 +18,6 @@
     <ClInclude Include="matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="matrixtest.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="NAlib.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -31,6 +28,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="point.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="matrixtest.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NAlibtest.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
