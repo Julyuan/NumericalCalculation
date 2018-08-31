@@ -38,6 +38,14 @@ Polynomial Polynomial::operator+(Polynomial & other)
 	return ans;
 }
 
+Polynomial::Polynomial(double zero_points[], int n) {
+	double* a = new double[n];
+
+	for (int iter = 0; iter <= n; iter++) {
+
+	}
+}
+
 
 Polynomial Polynomial::operator-(Polynomial & other)
 {

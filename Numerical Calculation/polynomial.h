@@ -8,6 +8,7 @@ class Polynomial {
 	int degree;
 	Polynomial();
 	Polynomial(double coe[], int exp[], int num);
+	Polynomial(double zero_points[], int num);
 	Polynomial(char* str);
 	
 

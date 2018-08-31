@@ -35,6 +35,19 @@ Matrix::Matrix(int row, int column):row(row), column(column){
 	}
 }
 
+Matrix Matrix::SubMatrix(int row, int column)
+{
+	Matrix res(row, column);
+	
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < column; j++) {
+			res.mat[i][j] = 0;
+		}
+	}
+
+	return res;
+}
+
 double ** Matrix::NewMatrix(int row, int column)
 {
 	double** res;
@@ -381,3 +394,63 @@ Matrix Matrix::operator*(Matrix& other){
 	}	
 	return res;
 }
+
+bool PositiveDefiniteMatrix::Judge()
+{
+	if (row != column)
+		return false;
+	for (int i = 0; i < row; i++) {
+		Matrix temp = this->SubMatrix(row, column);
+		if (temp.Determinant() < 0.0) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+Matrix PositiveDefiniteMatrix::LDLFactorization(int option = 0)
+{
+	Matrix L(*this), D(*this);
+	L.SetAllElementsZero();
+	D.SetAllElementsZero();
+
+	int n = this->row;
+	double* v = new double[n];
+	if (!this->Judge()) {
+		std::cout << "该矩阵不可分解" << std::endl;
+		return *this;
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < i; j++) 
+			v[j] = L.mat[i][j] * D.mat[j][j];
+		double sum = 0.0;
+		for (int j = 0; j < i; j++)
+			sum += L[i][j] * v[j];
+		D.mat[i][i] = this->mat[i][i] - sum;
+		sum = 0.0;
+		for (int j = i + 1; j < n; j++) {
+			for (int k = 0; k < i; k++) {
+				sum += L[j][k] * v[k];
+			}
+			L.mat[j][i] = (this->mat[j][i] - sum) / D[i][i];
+		}
+	}
+
+	delete[] v;
+	return option == 0 ? L:D;
+}
+
+Matrix PositiveDefiniteMatrix::Choleskis()
+{
+	Matrix a = LDLFactorization(0);
+	Matrix b = LDLFactorization(1);
+	for (int i = 0; i < row; i++) {
+		a.mat[i][i] = sqrt(b.mat[i][i]);
+	}
+
+	return a;
+}
+
+

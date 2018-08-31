@@ -20,6 +20,7 @@ public:
 	~Matrix();
 	Matrix(Matrix &other);
 	Matrix(int row, int column);
+	Matrix SubMatrix(int row, int column);
 	double** NewMatrix(int row, int column);
 	void DeleteMatrix(int row,  double** mat);
 	void CopyToArray(double** mat);
@@ -32,7 +33,7 @@ public:
 	void SetMatrix(char str[]);
 	double Determinant();
 	Matrix InvMatrix();
-	Matrix LUFactorization(int i);
+	Matrix LUFactorization(int option);
 
 	Matrix operator+(Matrix& other);
 	Matrix operator*(Matrix& other);
@@ -40,5 +41,14 @@ public:
 	Matrix& operator=(Matrix& other);
 	double* operator[](int index);
 };
+
+
+class PositiveDefiniteMatrix :public Matrix {
+	bool Judge();
+	Matrix LDLFactorization(int option);
+	Matrix Choleskis();
+
+};
+
 
 #endif
