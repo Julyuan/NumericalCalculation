@@ -22,6 +22,22 @@ Polynomial::Polynomial(double coe[], int exp[], int num)
 	}
 }
 
+void Polynomial::Constructor(double zero_points[], int num)
+{
+	this->Clear();
+	this->SetTerm(0, 1.0);
+	this->Print();
+	for (int i = 0; i < num; i++) {
+		Polynomial temp;
+		//temp.coefficients[0] = -1 * zero_points[i];
+		//temp.coefficients[1] = 1;
+		temp.SetTerm(0, -1.0*zero_points[i]);
+		temp.SetTerm(1, 1);
+		*this = *this * temp;
+		this->Print();
+	}
+}
+
 void Polynomial::SetTerm(int exp, double coe)
 {
 	degree = exp > degree ? exp : degree;
@@ -42,13 +58,19 @@ void Polynomial::AdjustDegree()
 void Polynomial::Print()
 {
 	this->AdjustDegree();
+	if (this->degree == 0) {
+		std::cout << coefficients[0] << std::endl;
+		return;
+	}
 	for (int i = this->degree; i >= 0; i--) {
 		if (i == this->degree && i!=0) {
 			if (!IsOne(coefficients[i])) {
-				printf("%lfx^%d", coefficients[i], i);
+				//printf("%lfx^%d", coefficients[i], i);
+				std::cout << coefficients[i] << "x^" << i;
 			}
 			else {
-				printf("x^%d", i);
+				//printf("x^%d", i);
+				std::cout << "x^" << i;
 			}
 		}
 		else if (i != 0) {
@@ -57,32 +79,47 @@ void Polynomial::Print()
 			else {
 				if (!IsOne(coefficients[i])) {
 					if (coefficients[i] > 0) {
-						printf(" + %lfx^%d", coefficients[i], i);
+						//printf(" + %lfx^%d", coefficients[i], i);
+						if(i!=1)
+							std::cout << " + " << coefficients[i] << "x^" << i;
+						else
+							std::cout << " + " << coefficients[i] << "x";
 					}
 					else {
-						printf(" - %lfx^%d", -coefficients[i], i);
+						//printf(" - %lfx^%d", -coefficients[i], i);
+						if(i!=1)
+							std::cout << " - " << -coefficients[i] << "x^" << i;
+						else
+							std::cout << " - " << -coefficients[i] << "x";
 					}
 				}
 				else {
 					if (coefficients[i] > 0) {
-						printf(" + x^%d", i);
+						//printf(" + x^%d", i);
+						std::cout << " + x^" << i;
 					}
 					else {
-						printf(" + x^%d", i);
+						//printf(" + x^%d", i);
+						std::cout << " - x^" << i;
 					}
 				}
 			}
 		}
 		else {
+			if (IsZero(coefficients[i]))
+				continue;
 			if (coefficients[i] > 0) {
-				printf(" + %lf", coefficients[i]);
+				//printf(" + %lf", coefficients[i]);
+				std::cout << " + " << coefficients[i];
 			}
 			else {
-				printf(" - %lf", -coefficients[i]);
+				//printf(" - %lf", -coefficients[i]);
+				std::cout << " - " << -coefficients[i];
 			}
 		}
 	}
-	printf("\n");
+//	printf("\n");
+	std::cout << std::endl;
 }
 
 void Polynomial::Clear()
@@ -99,6 +136,14 @@ double Polynomial::Value(double x)
 		ans = ans * x + coefficients[i];
 	}
 	return ans;
+}
+
+Polynomial Polynomial::Monic()
+{
+	Polynomial res(*this);
+	res.AdjustDegree();
+	res = res / res.coefficients[res.degree];
+	return res;
 }
 
 Polynomial Polynomial::operator+(Polynomial & other)
@@ -120,18 +165,7 @@ Polynomial::Polynomial(double zero_points[], int n) {
 	//	a[iter] = 0.0;
 	//}
 	// 这里可以用快速傅里叶变换优化，不过暂时写不出来。。。
-	this->Clear();
-	this->SetTerm(0,1.0);
-	this->Print();
-	for (int i = 0; i < n; i++) {
-		Polynomial temp;
-		//temp.coefficients[0] = -1 * zero_points[i];
-		//temp.coefficients[1] = 1;
-		temp.SetTerm(0, -1.0*zero_points[i]);
-		temp.SetTerm(1, 1);
-		*this = *this * temp;
-		this->Print();
-	}
+	Constructor(zero_points, n);
 }
 
 Polynomial::Polynomial(char * str)
@@ -161,6 +195,28 @@ Polynomial Polynomial::operator*(Polynomial & other)
 	}
 	ans.AdjustDegree();
 	return ans;
+}
+
+Polynomial Polynomial::operator*(double other)
+{
+	Polynomial res(*this);
+	res = res / (1.0 / other);
+	return res;
+}
+
+Polynomial Polynomial::operator/(double other)
+{
+	Polynomial res(*this);
+	if (IsZero(other)) {
+		std::cout << "除数是0，你有丶问题口巴?" << std::endl;
+		return res;
+	}
+	else {
+		for (int i = 0; i <= degree; i++) {
+			res.coefficients[i] /= other;
+		}
+	}
+	return res;
 }
 
 
