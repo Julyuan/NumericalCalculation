@@ -1,5 +1,6 @@
 #pragma once
 #include<vector>
+#include"polynomial.h"
 
 class Point {
 	Point();
@@ -12,6 +13,6 @@ class PointSet {
 	std::vector<Point> pointSet;
 	void Addpoint(double x, double y);
 	void Addpoints(char* str);
-
+	Polynomial Lagrange();
 
 };

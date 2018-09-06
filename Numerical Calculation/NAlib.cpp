@@ -465,6 +465,11 @@ bool IsZero(double a)
 	return a*a < ZERO;
 }
 
+bool IsOne(double a)
+{
+	return (a-1)*(a-1) < ZERO;
+}
+
 int PolynomialConvertAuxiliary(double x[], bool vis[], int total, double * res, int n, int current, int guard)
 {
 	if (current + total - 1 - guard < n)

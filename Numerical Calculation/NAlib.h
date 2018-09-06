@@ -9,7 +9,7 @@
 
 
 #define ABS(a) a > 0 ? a : -a
-#define ZERO 1e-12
+#define ZERO 1e-14
 #define TRUE 1
 #define FALSE 0
 #define MaxRowNumber 1000
@@ -50,6 +50,8 @@ int GaussElimination(double** mat, int row, int column);
 int GaussJordanMethod(double** a, int row, int column);
 //判断一个数是否为零
 bool IsZero(double a);
+//判断一个数是否为一
+bool IsOne(double a);
 //多项式转化的辅助函数
 int PolynomialConvertAuxiliary(double x[], bool vis[], int total, double* res, int n, int current, int guard);
 
