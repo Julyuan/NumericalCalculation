@@ -21,8 +21,8 @@ public:
 	Matrix(Matrix &other);
 	Matrix(int row, int column);
 	Matrix SubMatrix(int row, int column);
-	double** NewMatrix(int row, int column);
-	void DeleteMatrix(int row,  double** mat);
+	static double** NewMatrix(int row, int column);
+	static void DeleteMatrix(int row,  double** mat);
 	void CopyToArray(double** mat);
 
 	int GetRow();

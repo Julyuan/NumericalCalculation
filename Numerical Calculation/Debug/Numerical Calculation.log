@@ -1,3 +1,10 @@
 ﻿  polynomial.cpp
+  point.cpp
+  matrix.cpp
+c:\users\jin lianyuan\documents\visual studio 2015\projects\numerical calculation\numerical calculation\matrix.cpp(183): warning C4101: “k”: 未引用的局部变量
+  main.cpp
+  正在生成代码...
+  正在跳过...(未检测到相关更改)
+  vector.cpp
   Numerical Calculation.vcxproj -> C:\Users\Jin Lianyuan\documents\visual studio 2015\Projects\Numerical Calculation\Debug\Numerical Calculation.exe
   Numerical Calculation.vcxproj -> C:\Users\Jin Lianyuan\documents\visual studio 2015\Projects\Numerical Calculation\Debug\Numerical Calculation.pdb (Full PDB)

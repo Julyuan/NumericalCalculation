@@ -39,6 +39,9 @@
     <ClInclude Include="polynomialtest.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="pointtest.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

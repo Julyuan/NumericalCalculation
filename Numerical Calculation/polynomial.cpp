@@ -26,15 +26,21 @@ void Polynomial::Constructor(double zero_points[], int num)
 {
 	this->Clear();
 	this->SetTerm(0, 1.0);
-	this->Print();
+	//this->Print();
+	//for (int i = 0; i < num; i++) {
+	//	std::cout << zero_points[i] << " ";
+	//}
+	//std::cout << std::endl;
 	for (int i = 0; i < num; i++) {
 		Polynomial temp;
 		//temp.coefficients[0] = -1 * zero_points[i];
 		//temp.coefficients[1] = 1;
-		temp.SetTerm(0, -1.0*zero_points[i]);
-		temp.SetTerm(1, 1);
+		temp.SetTerm(0, -zero_points[i]);
+		temp.SetTerm(1, 1.0);
+		//std::cout << "temp = ";
+		//temp.Print();
 		*this = *this * temp;
-		this->Print();
+		//this->Print();
 	}
 }
 
@@ -152,7 +158,7 @@ Polynomial Polynomial::operator+(Polynomial & other)
 	Polynomial ans;
 	ans.degree = other.degree > degree ? other.degree : degree;
 
-	for (int i = 0; i < ans.degree; i++) {
+	for (int i = 0; i <= ans.degree; i++) {
 		ans.coefficients[i] = other.coefficients[i] + coefficients[i];
 	}
 	return ans;
@@ -187,6 +193,7 @@ Polynomial Polynomial::operator-(Polynomial & other)
 Polynomial Polynomial::operator*(Polynomial & other)
 {
 	Polynomial ans(*this);
+	ans.Clear();
 	ans.degree = degree + other.degree;
 	for (int i = 0; i <= degree; i++) {
 		for (int j = 0; j <= other.degree; j++) {

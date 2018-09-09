@@ -151,6 +151,7 @@
     <ClInclude Include="NAlib.h" />
     <ClInclude Include="NAlibtest.hpp" />
     <ClInclude Include="point.h" />
+    <ClInclude Include="pointtest.hpp" />
     <ClInclude Include="polynomial.h" />
     <ClInclude Include="polynomialtest.hpp" />
     <ClInclude Include="vector.h" />
