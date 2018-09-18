@@ -1,7 +1,5 @@
 #include"vector.h"	
 
-
-
 Vector::Vector() {
 	dimension = 0;
 	vec = nullptr;
@@ -48,6 +46,7 @@ Vector::Vector(Vector& other) {
 
 Vector::Vector(char * str)
 {
+	
 }
 
 void Vector::SetAllElementsZero()
@@ -69,6 +68,26 @@ double Vector::dot(const Vector & other)
 		}
 	}
 	return ans;
+}
+
+Vector Vector::operator-(Vector & other)
+{
+	Vector res(this->dimension);
+	if (this->dimension != other.dimension) {
+		std::cout << "向量维数不一致，运算无效" << std::endl;
+		return res;
+	}
+	else {
+		for (int i = 0; i < res.dimension; i++) {
+			res.vec[i] = this->vec[i] - other.vec[i];
+		}
+		return res;
+	}
+}
+
+Vector Vector::operator+(Vector & other)
+{
+	return Vector();
 }
 
 Vector Vector::operator=(const Vector & other)

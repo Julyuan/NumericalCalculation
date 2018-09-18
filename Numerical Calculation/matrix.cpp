@@ -272,12 +272,17 @@ Vector Matrix::LinearEquationDirectMethod(Vector & b)
 
 Vector Matrix::LinearEquationIterativeMethod(Vector & b)
 {
+	Vector res;
 	if (0 == 1) {
 		printf("该矩阵无法由迭代求解");
 	}
 	else {
+		double TOL = 0.001;
 		int N = 100, n = row;
 		int k = 0;
+		Vector XO(res.dimension);
+		Vector x(XO);
+		XO.SetAllElementsZero();
 		while (k < N) {
 			for (int i = 0; i < n; i++) {
 				double sum = 0;
@@ -285,15 +290,19 @@ Vector Matrix::LinearEquationIterativeMethod(Vector & b)
 					if (j == i)
 						continue;
 					else {
-						sum += ;
+						sum += mat[i][j] * XO[j];
 					}
 				}
-				if (< )
-					return;
+				x[i] = (b[i] - sum) / mat[i][i];
 			}
+			if ((x - XO).Norm(0) < TOL)
+				return x;
+			k = k + 1;
+			XO = x;
 		}
 	}
-	return Vector();
+	printf("Maximum number of iterations exceeded");
+	return b;
 }
 
 // void GaussElimination(double a[MaxRowNumber][MaxColumnNumber], int row, int column)
