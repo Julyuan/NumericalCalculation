@@ -1,6 +1,11 @@
 #include"point.h"
 
-Point::Point(double x, double y) :x(x), y(y) {
+Point::Point(double x, double y) :x(x), y(y),differential(0) {
+
+}
+
+Point::Point(double x, double y, double d): x(x), y(y), differential(d)
+{
 
 }
 
@@ -14,8 +19,13 @@ double Point::GetY()
 	return this->y;
 }
 
+double Point::GetDiff()
+{
+	return this->differential;
+}
+
 Point::Point() {
-	x = y = 0.0;
+	x = y = this->differential = 0.0;
 }
 
 PointSet::PointSet()
@@ -30,8 +40,19 @@ void PointSet::Addpoint(double x, double y)
 	number++;
 }
 
-void PointSet::Addpoints(char * str)
+void PointSet::Addpoints(char * str, int mode = 0)
 {
+	std::vector<double> elements;
+
+	int *len = new int;
+	for (int i = 0; i < strlen(str); i++) {
+		if (str[i] <= '9' && str[i] >= '0' || str[i] == '-') {
+			double res = ReadNumber(str + i, len);
+			elements.push_back(res);
+			i += *len;
+		}
+	}
+
 
 }
 
@@ -74,11 +95,12 @@ double PointSet::Neville(double x)
 	}
 	for (int i = 1; i <= n; i++) {
 		for (int j = 1; j <= i; j++) {
-			Q[i][j] = (x - this->pointSet[i - j].GetX()) - (x - pointSet[i].GetX())*Q[i - 1][j - 1];
+			Q[i][j] = Q[i][j-1]*(x - this->pointSet[i - j].GetX()) - (x - pointSet[i].GetX())*Q[i - 1][j - 1];
 			Q[i][j] /= (pointSet[i].GetX()-this->pointSet[i - j].GetX());
 		}
 	}
-
-	return 0.0;
+	double res = Q[n][n];
+	Matrix::DeleteMatrix(1 + n, Q);
+	return res;
 }
 

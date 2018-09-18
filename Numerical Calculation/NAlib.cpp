@@ -355,13 +355,7 @@ int GaussElimination(double** a, int row, int column)
 {
 	int i, j, k, p;
 	int n = row;
-	//for (i = 0; i < row; i++) {
-	//	for (j = 0; j < column; j++) {
-	//		printf("%lf ", a[i][j]);
-	//	}
-	//	printf("\n");
-	//}
-
+	
 	for (i = 0; i < n - 1; i++)
 	{
 		for (p = i; p < n; p++)
@@ -387,7 +381,7 @@ int GaussElimination(double** a, int row, int column)
 		for (j = i + 1; j < n; j++)
 		{
 			double m = a[j][i] / a[i][i];
-			for (k = i; k <= n; k++)
+			for (k = i; k <= column - 1; k++)
 			{
 				a[j][k] -= m * a[i][k];
 			}

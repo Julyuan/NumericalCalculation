@@ -35,6 +35,11 @@ Matrix::Matrix(int row, int column):row(row), column(column){
 	}
 }
 
+Vector Matrix::ToVector()
+{
+	return Vector();
+}
+
 Matrix Matrix::SubMatrix(int row, int column)
 {
 	Matrix res(row, column);
@@ -47,6 +52,26 @@ Matrix Matrix::SubMatrix(int row, int column)
 
 	return res;
 }
+
+double ** Matrix::MatrixJoin(Matrix & a, Vector & b)
+{	
+	if (a.row != b.dimension) {
+		std::cout << "矩阵和向量维数不匹配" << std::endl;
+		return nullptr;
+	}
+	else {
+		int res_row = a.row;
+		int res_column = a.column + 1;
+		double** res = NewMatrix(res_row, res_column);
+		for (int i = 0; i < res_row; i++) {
+			for (int j = 0; j < res_column; j++) {
+				res[i][j] = j == res_column - 1 ? b[j] : a[i][j];
+			}
+		}
+	}
+
+}
+
 
 double ** Matrix::NewMatrix(int row, int column)
 {
@@ -198,7 +223,21 @@ double Matrix::Determinant()
 	for(i = 0; i < this->row; i++)
 		ans *= tempmat[i][i];
 	return ans;
-} 
+}
+
+Vector Matrix::LinearEquation(Vector & b)
+{
+	Vector res(b);
+	int n = this->GetRow();
+	res.SetAllElementsZero();
+	double** mat = MatrixJoin(*this, b);
+	GaussElimination(mat, this->GetRow(), this->GetColumn() + 1);
+	res.vec[n - 1] = mat[n - 1][n] / mat[n - 1][n - 1];
+	for (int i = n - 2; i >= 0;i--) {
+		for()
+	}
+	return res;
+}
 
 // void GaussElimination(double a[MaxRowNumber][MaxColumnNumber], int row, int column)
 
@@ -375,7 +414,21 @@ Matrix & Matrix::operator=(Matrix & other)
 	return *this;
 }
 
-double * Matrix::operator[](int index)
+bool Matrix::operator==(Matrix & other)
+{
+	if(this->column!=other.column || this->row!=other.row)
+		return false;
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < column; j++) {
+			if (IsZero(mat[i][j] - other.mat[i][j]) == false)
+				return false;
+		}
+	}
+
+	return true;
+}
+
+double *& Matrix::operator[](int index)
 {
 	return this->mat[index];
 }
@@ -453,4 +506,22 @@ Matrix PositiveDefiniteMatrix::Choleskis()
 	return a;
 }
 
+Vector Matrix::operator*(Vector & other)
+{
+	if (GetColumn() != other.dimension) {
+		std::cout << "矩阵向量不匹配，无法相乘" << std::endl;
+		return other;
+	}
+	else {
+		Vector ans(GetRow());
+		ans.SetAllElementsZero();
 
+		for (int i = 0; i < GetRow(); i++) {
+			for (int j = 0; j < other.dimension; j++) {
+				ans.vec[i] += this->mat[i][j] * other.vec[j];
+			}
+		}
+		return ans;
+	}
+	
+}

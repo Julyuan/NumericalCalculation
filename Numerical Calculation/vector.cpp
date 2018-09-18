@@ -52,25 +52,6 @@ double Vector::dot(const Vector & other)
 	return ans;
 }
 
-Vector Vector::operator*(Matrix & other)
-{
-	if (other.GetColumn() != dimension) {
-		std::cout << "矩阵向量不匹配，无法相乘" << std::endl;
-		return *this;
-	}
-	else {
-		Vector ans(other.GetRow());
-		ans.SetAllElementsZero();
-
-		for (int i = 0; i < other.GetRow(); i++) {
-			for (int j = 0; j < dimension; j++) {
-				ans.vec[i] += other[i][j] * this->vec[j];
-			}
-		}
-	}
-	return Vector();
-}
-
 Vector Vector::operator=(const Vector & other)
 {
 	dimension = other.dimension;

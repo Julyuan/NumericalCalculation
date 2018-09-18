@@ -1,5 +1,5 @@
 #pragma once
-#include"matrix.h"
+#include"NAlib.h"
 
 class Vector {
 public:
@@ -17,7 +17,7 @@ public:
 
 	double dot(const Vector& other);
 
-	Vector operator*(Matrix& other);
+//	Vector operator*(Matrix& other);
 	Vector operator=(const Vector& other);
 	double operator[](int index);
 };

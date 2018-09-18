@@ -7,6 +7,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include"vector.h"
 #include"NAlib.h"
 
 class Matrix
@@ -20,7 +21,9 @@ public:
 	~Matrix();
 	Matrix(Matrix &other);
 	Matrix(int row, int column);
+	Vector ToVector();
 	Matrix SubMatrix(int row, int column);
+	static double** MatrixJoin(Matrix& a, Vector& b);
 	static double** NewMatrix(int row, int column);
 	static void DeleteMatrix(int row,  double** mat);
 	void CopyToArray(double** mat);
@@ -32,6 +35,8 @@ public:
 	void SetAllElementsZero();
 	void SetMatrix(char str[]);
 	double Determinant();
+	Vector LinearEquation(Vector& b);
+	
 	Matrix InvMatrix();
 	Matrix LUFactorization(int option);
 
@@ -39,7 +44,9 @@ public:
 	Matrix operator*(Matrix& other);
 	Matrix operator-(Matrix& other);
 	Matrix& operator=(Matrix& other);
-	double* operator[](int index);
+	Vector operator*(Vector& other);
+	bool operator==(Matrix& other);
+	double*& operator[](int index);
 };
 
 
