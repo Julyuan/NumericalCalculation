@@ -10,6 +10,7 @@ public:
 	Vector(Vector& other);
 	Vector(char* str);
 	Vector(int dim);
+	double Norm(int dimension);
 	~Vector() {
 		delete[] vec;
 	}
@@ -19,5 +20,5 @@ public:
 
 //	Vector operator*(Matrix& other);
 	Vector operator=(const Vector& other);
-	double operator[](int index);
+	double& operator[](int index);
 };

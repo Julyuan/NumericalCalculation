@@ -15,7 +15,7 @@ class Matrix
 public:
 	double** mat;
 	int row, column;
-	
+
 public:	
 	Matrix();
 	~Matrix();
@@ -28,6 +28,7 @@ public:
 	static void DeleteMatrix(int row,  double** mat);
 	void CopyToArray(double** mat);
 
+	double GetNorm(int p);
 	int GetRow();
 	int GetColumn();
 	void PrintMatrix();
@@ -35,8 +36,9 @@ public:
 	void SetAllElementsZero();
 	void SetMatrix(char str[]);
 	double Determinant();
-	Vector LinearEquation(Vector& b);
-	
+	Vector LinearEquation(Vector& b, int mode);
+	Vector LinearEquationDirectMethod(Vector& b);
+	Vector LinearEquationIterativeMethod(Vector& b);
 	Matrix InvMatrix();
 	Matrix LUFactorization(int option);
 

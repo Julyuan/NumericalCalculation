@@ -15,6 +15,25 @@ Vector::Vector(int dim) {
 	}
 }
 
+double Vector::Norm(int dim)
+{
+	if (dim < 1) {
+		double res = vec[0];
+		for (int i = 1; i < dim; i++) {
+			res = res < vec[i] ? vec[i] : res;
+		}
+		return res;
+	}
+	else {
+		double res = 0;
+		for (int i = 0; i < dim; i++) {
+			res += pow(vec[i], (double)dim);
+		}
+		return pow(res, 1.0 / dim);
+	}
+	
+}
+
 Vector::Vector(double a[], int dim) {
 	dimension = dim;
 	vec = new double[dimension];
@@ -62,7 +81,7 @@ Vector Vector::operator=(const Vector & other)
 	return *this;
 }
 
-double Vector::operator[](int index)
+double& Vector::operator[](int index)
 {
 	return vec[index];
 }

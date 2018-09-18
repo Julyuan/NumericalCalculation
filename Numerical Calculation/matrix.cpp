@@ -102,6 +102,22 @@ void Matrix::CopyToArray(double ** mat)
 	}
 }
 
+
+double Matrix::GetNorm(int p)
+{
+	if (row != column)
+		return 0;
+	double sum = 0;
+	for (int i = 0; i < row; i++) {
+		double temp = 0;
+		for (int j = 0; j < column; j++) {
+			temp += ABS(mat[i][j]);
+		}
+		sum = temp > sum ? temp : sum;
+	}
+	return sum;
+}
+
 void Matrix::SetMatrix()
 {
 	DeleteMatrix(row, mat);
@@ -225,21 +241,67 @@ double Matrix::Determinant()
 	return ans;
 }
 
-Vector Matrix::LinearEquation(Vector & b)
+Vector Matrix::LinearEquation(Vector & b, int mode = 0)
 {
+	if (mode == 0) {
+		return LinearEquationDirectMethod(b);
+	}
+	else {
+		return LinearEquationIterativeMethod(b);
+	}
+}
+
+Vector Matrix::LinearEquationDirectMethod(Vector & b)
+{
+
 	Vector res(b);
 	int n = this->GetRow();
 	res.SetAllElementsZero();
 	double** mat = MatrixJoin(*this, b);
 	GaussElimination(mat, this->GetRow(), this->GetColumn() + 1);
 	res.vec[n - 1] = mat[n - 1][n] / mat[n - 1][n - 1];
-	for (int i = n - 2; i >= 0;i--) {
-		for()
+	for (int i = n - 2; i >= 0; i--) {
+		double sum = 0;
+		for (int j = i + 1; j < n; j++) {
+			sum += mat[i][j] * b.vec[j];
+		}
+		res.vec[i] = (mat[i][n] - sum) / mat[i][i];
 	}
 	return res;
 }
 
+Vector Matrix::LinearEquationIterativeMethod(Vector & b)
+{
+	if (0 == 1) {
+		printf("该矩阵无法由迭代求解");
+	}
+	else {
+		int N = 100, n = row;
+		int k = 0;
+		while (k < N) {
+			for (int i = 0; i < n; i++) {
+				double sum = 0;
+				for (int j = 0; j < n; j++) {
+					if (j == i)
+						continue;
+					else {
+						sum += ;
+					}
+				}
+				if (< )
+					return;
+			}
+		}
+	}
+	return Vector();
+}
+
 // void GaussElimination(double a[MaxRowNumber][MaxColumnNumber], int row, int column)
+
+double Matrix::GetNorm(int p)
+{
+	return 0.0;
+}
 
 int Matrix::GetRow()
 {
