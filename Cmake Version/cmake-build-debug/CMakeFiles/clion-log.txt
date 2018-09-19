@@ -1,0 +1,10 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/jinlianyuan/Documents/GitLibrary/NumericalCalculation/Cmake Version"
+CMake Error: Could not find cmake module file: CMakeDetermineCalculationCompiler.cmake
+CMake Error: Error required internal CMake variable not set, cmake may not be built correctly.
+Missing variable is:
+CMAKE_Calculation_COMPILER_ENV_VAR
+CMake Error: Could not find cmake module file: /Users/jinlianyuan/Documents/GitLibrary/NumericalCalculation/Cmake Version/cmake-build-debug/CMakeFiles/3.12.1/CMakeCalculationCompiler.cmake
+CMake Error: Could not find cmake module file: CMakeCalculationInformation.cmake
+CMake Error: Could not find cmake module file: CMakeTestCalculationCompiler.cmake
+-- Configuring incomplete, errors occurred!
+See also "/Users/jinlianyuan/Documents/GitLibrary/NumericalCalculation/Cmake Version/cmake-build-debug/CMakeFiles/CMakeOutput.log".
