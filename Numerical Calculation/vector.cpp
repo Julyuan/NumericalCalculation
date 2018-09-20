@@ -41,7 +41,11 @@ Vector::Vector(double a[], int dim) {
 }
 
 Vector::Vector(Vector& other) {
-	*this = other;
+	this->dimension = other.dimension;
+	vec = new double[dimension];
+	for (int i = 0; i < dimension; i++) {
+		vec[i] = other.vec[i];
+	}
 }
 
 Vector::Vector(char * str)
@@ -70,6 +74,15 @@ double Vector::dot(const Vector & other)
 	return ans;
 }
 
+Vector Vector::operator-()
+{
+	Vector res(*this);
+	for (int i = 0; i < dimension; i++) {
+		res.vec[i] *= -1;
+	}
+	return res;
+}
+
 Vector Vector::operator-(Vector & other)
 {
 	Vector res(this->dimension);
@@ -87,7 +100,7 @@ Vector Vector::operator-(Vector & other)
 
 Vector Vector::operator+(Vector & other)
 {
-	return Vector();
+	return *this - (-other);
 }
 
 Vector Vector::operator=(const Vector & other)
@@ -98,6 +111,20 @@ Vector Vector::operator=(const Vector & other)
 		vec[i] = other.vec[i];
 	}
 	return *this;
+}
+
+Vector Vector::operator/(double other)
+{
+	Vector res(*this);
+	if (IsZero(other)) {
+		std::cout << "除数不能为0" << std::endl;
+	}
+	else {
+		for (int i = 0; i < dimension; i++) {
+			res.vec[i] /= other;
+		}
+	}
+	return res;
 }
 
 double& Vector::operator[](int index)

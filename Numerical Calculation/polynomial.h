@@ -15,6 +15,7 @@ public:
 	Polynomial(double zero_points[], int num);
 	Polynomial(char* str);
 	
+
 	void Constructor(double zero_points[], int num);
 	void SetTerm(int exp, double coe);
 	void AdjustDegree();

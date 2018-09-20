@@ -241,6 +241,46 @@ double Matrix::Determinant()
 	return ans;
 }
 
+//只适用于所有特征根是单根的情况
+double Matrix::PowerMethod(Vector* res,Vector * Eigenvector = NULL)
+{
+	int N = 100;
+	int n = this->row;
+	double TOL = 0.00001;
+	Vector* res = new Vector(this->row);
+	Vector y;
+	if (Eigenvector == NULL) {
+		res = Eigenvector;
+	}
+	else {
+		for (int i = 0; i < n; i++) {
+			res->vec[i] = double(rand() % 100 - 50);
+		}
+	}
+
+	double eigenValue;
+	
+	int k = 1;
+	bool flag = false;
+	*res = *res / res->Norm(2);
+	while (k <= N) {
+		y = *this * (*res);
+		eigenValue = res->dot(y);
+		if (IsZero(y.Norm(2))) {
+			
+			break;
+		}
+		double error = (*res - (y / y.Norm(2))).Norm(2);
+		if (error < TOL) {
+			return eigenValue;
+		}
+	}
+
+	std::cout << "迭代超出，思想出了问题" << std::endl;
+	return -1;
+}
+
+// 线性方程组求解方法
 Vector Matrix::LinearEquation(Vector & b, int mode = 0)
 {
 	if (mode == 0) {
@@ -251,6 +291,8 @@ Vector Matrix::LinearEquation(Vector & b, int mode = 0)
 	}
 }
 
+
+// 利用直接的方法解线性方程组
 Vector Matrix::LinearEquationDirectMethod(Vector & b)
 {
 
@@ -270,6 +312,7 @@ Vector Matrix::LinearEquationDirectMethod(Vector & b)
 	return res;
 }
 
+// 利用迭代的方法求解线性方程组
 Vector Matrix::LinearEquationIterativeMethod(Vector & b)
 {
 	Vector res;
@@ -306,10 +349,20 @@ Vector Matrix::LinearEquationIterativeMethod(Vector & b)
 }
 
 // void GaussElimination(double a[MaxRowNumber][MaxColumnNumber], int row, int column)
-
+// 矩阵现在只能求一范数和无穷范数
 double Matrix::GetNorm(int p)
 {
-	return 0.0;
+	// 无穷范数
+	if (p == 0) {
+
+		return 0.0;
+	}
+
+	// 一范数
+	else if (p == 1) {
+
+		return 0.0;
+	}
 }
 
 int Matrix::GetRow()
@@ -322,6 +375,7 @@ int Matrix::GetColumn()
 	return this->column;
 }
 
+// 打印矩阵
 void Matrix::PrintMatrix()
 {
 	for(int i = 0; i < this->row; i++)
@@ -335,6 +389,7 @@ void Matrix::PrintMatrix()
 	printf("\n");
 }
 
+// 求解逆矩阵
 Matrix Matrix::InvMatrix()
 {
 	Matrix ans(*this);
@@ -346,11 +401,6 @@ Matrix Matrix::InvMatrix()
 
 	double** auxiliary = NewMatrix(row, 2 * column);
 
-	//for (int i = 0; i < row; i++) {
-	//	for (int j = 0; j < column; j++) {
-	//		auxiliary[i][j] = mat[i][j];
-	//	}
-	//}
 	CopyToArray(auxiliary);
 
 	for (int i = 0; i < row; i++) {
@@ -380,6 +430,7 @@ Matrix Matrix::InvMatrix()
 	return ans;
 }
 
+// 矩阵LU分解
 Matrix Matrix::LUFactorization(int choose = 1)
 {
 	Matrix lower(*this), upper(*this);

@@ -9,6 +9,16 @@ Point::Point(double x, double y, double d): x(x), y(y), differential(d)
 
 }
 
+bool Point::operator<(Point & other)
+{
+	return this->x < other.x;
+}
+
+bool Point::operator==(Point & other)
+{
+	return IsZero((this->x-other.x)) && IsZero(this->y - other.y);
+}
+
 double Point::GetX()
 {
 	return this->x;
@@ -24,6 +34,8 @@ double Point::GetDiff()
 	return this->differential;
 }
 
+
+
 Point::Point() {
 	x = y = this->differential = 0.0;
 }
@@ -31,6 +43,11 @@ Point::Point() {
 PointSet::PointSet()
 {
 	number = 0;
+}
+
+void PointSet::Sort()
+{
+	std::sort(pointSet.begin(), pointSet.end());
 }
 
 void PointSet::Addpoint(double x, double y)
@@ -102,5 +119,16 @@ double PointSet::Neville(double x)
 	double res = Q[n][n];
 	Matrix::DeleteMatrix(1 + n, Q);
 	return res;
+}
+
+double PointSet::DividedDifference(int start, int rank)
+{
+	if (rank == 0) {
+		return pointSet[start].GetY();
+	}
+	else {
+		return (DividedDifference(start + 1, rank - 1) - DividedDifference(start, rank - 1)) / (pointSet[start + 1].GetX() - pointSet[start].GetX());
+	}
+	return 0.0;
 }
 

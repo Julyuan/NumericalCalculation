@@ -18,8 +18,12 @@ public:
 
 	double dot(const Vector& other);
 
+	Vector operator-();
 	Vector operator-(Vector& other);
 	Vector operator+(Vector& other);
 	Vector operator=(const Vector& other);
+	Vector operator/(double other);
 	double& operator[](int index);
+
+
 };
