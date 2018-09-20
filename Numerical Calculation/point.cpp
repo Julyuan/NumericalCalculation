@@ -82,21 +82,16 @@ Polynomial PointSet::Lagrange()
 		double* arr = new double[number];
 		for (int j = 0; j < number; j++) {
 			arr[j] = i > j ? pointSet[j].GetX() : pointSet[j+1].GetX();
-			//std::cout << arr[j] << " ";
 		}
-		//std::cout << std::endl;
 		L[i].Constructor(arr, number);
-		//std::cout << "L = ";
-		//L[i].Print();
+		
 		double divisor = 1.0;
 		double xk = pointSet[i].GetX();
 		for (int j = 0; j < number; j++) {
 			divisor = divisor * (xk - (i > j ? pointSet[j].GetX() : pointSet[j + 1].GetX()));
 		}
-		//std::cout << "divisor = " << divisor << std::endl;
 		P = P + L[i] * pointSet[i].GetY() / divisor;
 		delete[] arr;
-		//P.Print();
 	}
 
 	delete[] L;
@@ -130,5 +125,10 @@ double PointSet::DividedDifference(int start, int rank)
 		return (DividedDifference(start + 1, rank - 1) - DividedDifference(start, rank - 1)) / (pointSet[start + 1].GetX() - pointSet[start].GetX());
 	}
 	return 0.0;
+}
+
+Vector PointSet::NewtonInterpolatory()
+{
+	return Vector();
 }
 
