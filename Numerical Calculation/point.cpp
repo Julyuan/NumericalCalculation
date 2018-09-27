@@ -29,6 +29,16 @@ double Point::GetY()
 	return this->y;
 }
 
+void Point::SetX(double x)
+{
+	this->x = x;
+}
+
+void Point::SetY(double y)
+{
+	this->y = y;
+}
+
 double Point::GetDiff()
 {
 	return this->differential;
@@ -55,6 +65,24 @@ void PointSet::Addpoint(double x, double y)
 	Point temp(x, y);
 	this->pointSet.push_back(temp);
 	number++;
+}
+
+void PointSet::Addpoints(std::initializer_list<double> lis)
+{
+	Point temp;
+	int count = 0;
+	for (auto i : lis) {
+		if (count % 2 == 0) {
+			temp.SetX(i);
+		}
+		else {
+			temp.SetY(i);
+			Point tmp(temp);
+			this->pointSet.push_back(tmp);
+		}
+
+		count++;
+	}
 }
 
 void PointSet::Addpoints(char * str, int mode = 0)

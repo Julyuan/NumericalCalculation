@@ -22,6 +22,8 @@ public:
 	bool operator==(Point &other);
 	double GetX();
 	double GetY();
+	void SetX(double x);
+	void SetY(double y);
 	double GetDiff();
 };
 
