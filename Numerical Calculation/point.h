@@ -24,6 +24,7 @@ public:
 	double GetY();
 	void SetX(double x);
 	void SetY(double y);
+	void PrintPoint();
 	double GetDiff();
 };
 
@@ -37,7 +38,7 @@ public:
 	PointSet();
 	// 点排序（按照x坐标的大小）,为其他方法做铺垫
 	void Sort();
-
+	void Clear();
 	// 添加点
 	void Addpoint(double x, double y);
 	void Addpoints(std::initializer_list<double>lis);
@@ -50,4 +51,6 @@ public:
 	double DividedDifference(int start, int rank);
 	// 牛顿插值
 	Vector NewtonInterpolatory();
+
+	void PrintPointSet();
 };

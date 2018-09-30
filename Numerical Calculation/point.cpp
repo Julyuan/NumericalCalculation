@@ -4,8 +4,7 @@ Point::Point(double x, double y) :x(x), y(y),differential(0) {
 
 }
 
-Point::Point(double x, double y, double d): x(x), y(y), differential(d)
-{
+Point::Point(double x, double y, double d): x(x), y(y), differential(d){
 
 }
 
@@ -39,6 +38,11 @@ void Point::SetY(double y)
 	this->y = y;
 }
 
+void Point::PrintPoint()
+{
+	std::cout << "(" << this->GetX() << " ," << this->GetY() << ")";
+}
+
 double Point::GetDiff()
 {
 	return this->differential;
@@ -58,6 +62,12 @@ PointSet::PointSet()
 void PointSet::Sort()
 {
 	std::sort(pointSet.begin(), pointSet.end());
+}
+
+void PointSet::Clear()
+{
+	number = 0;
+	pointSet.clear();
 }
 
 void PointSet::Addpoint(double x, double y)
@@ -158,5 +168,14 @@ double PointSet::DividedDifference(int start, int rank)
 Vector PointSet::NewtonInterpolatory()
 {
 	return Vector();
+}
+
+void PointSet::PrintPointSet()
+{
+	std::cout << "[";
+	for (auto iter : this->pointSet) {
+		iter.PrintPoint();
+	}
+	std::cout<<"]"<<std::endl;
 }
 
