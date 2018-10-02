@@ -5,6 +5,7 @@
 
 void TestMatrix(){
 	Matrix a,b, c,d,e,f;
+	std::cout << "´òÓ¡¾ØÕó²âÊÔ" << std::endl;
 	a.SetMatrix("[1 1 0 3;2 1 -1 1;3 -1 -1 2;-1 2 3 -1]");
 	a.PrintMatrix();
 //	b = a.InvMatrix();
@@ -12,9 +13,16 @@ void TestMatrix(){
 	b = a.LUFactorization(1);
 	c = a.LUFactorization(2);
 
+	std::cout << std::endl;
+	std::cout << "¾ØÕóLU·Ö½â²âÊÔ" << std::endl;
 	b.PrintMatrix();
 	c.PrintMatrix();
 
+	std::cout << std::endl;
+	d.SetMatrix("[1 2 -1;0 3 -1;5 -1 1]");
+	std::cout << "¾ØÕó·¶Êý²âÊÔ" << std::endl;
+	std::cout << "¾ØÕóµÄ1·¶Êý:" << d.GetNorm(1)<< std::endl;
+	std::cout << "¾ØÕóµÄÎÞÇî·¶Êý" << d.GetNorm()<< std::endl;
 //	std::cout << a[0][0] << std::endl;
 	//std::cout << std::endl;
 	//b.SetMatrix("[1,1,1;1,1,1;1,1,1]");

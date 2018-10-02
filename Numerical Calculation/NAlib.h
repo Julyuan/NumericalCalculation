@@ -9,13 +9,16 @@
 #include<malloc.h>
 
 
-#define ABS(a) a > 0 ? a : -a
 #define ZERO 1e-14
 #define TRUE 1
 #define FALSE 0
 #define MaxRowNumber 1000
 #define MaxColumnNumber 1000
 
+template<class T>
+T ABS(T temp) {
+	return temp > 0 ? temp : -temp;
+}
 
 // 表达式解析函数 
 double eval(char s[], double x); 

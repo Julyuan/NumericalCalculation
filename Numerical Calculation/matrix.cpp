@@ -35,6 +35,20 @@ Matrix::Matrix(int row, int column):row(row), column(column){
 	}
 }
 
+double Matrix::MaxElement(int mode)
+{
+	double res = mode == 0 ? ABS(this->mat[0][0]) : mat[0][0];
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < column; j++) {
+			res = mode == 0 ? (ABS(mat[i][j]) > res ? ABS(mat[i][j]) : res) : (mat[i][j] > res ? mat[i][j] : res);
+			std::cout << "i = " << i << ", j = " << j << std::endl;
+			std::cout << "mat[i][j] = " << ABS(mat[i][j]) << " res = " << res << std::endl;
+		}
+	}
+	std::cout << "final res = " << res << std::endl;
+	return res;
+}
+
 Vector Matrix::ToVector()
 {
 	return Vector();
@@ -105,17 +119,26 @@ void Matrix::CopyToArray(double ** mat)
 
 double Matrix::GetNorm(int p)
 {
-	if (row != column)
-		return 0;
-	double sum = 0;
-	for (int i = 0; i < row; i++) {
-		double temp = 0;
-		for (int j = 0; j < column; j++) {
-			temp += ABS(mat[i][j]);
+	if (p <= 0) {
+		if (row != column)
+			return 0;
+		double sum = 0;
+		for (int i = 0; i < row; i++) {
+			double temp = 0;
+			for (int j = 0; j < column; j++) {
+				temp += ABS(mat[i][j]);
+			}
+			sum = temp > sum ? temp : sum;
 		}
-		sum = temp > sum ? temp : sum;
+		return sum;
 	}
-	return sum;
+	else if (p == 1) {
+		return MaxElement();
+	}
+	else {
+		std::cout << "范数无效" << std::endl;
+		return -1;
+	}
 }
 
 void Matrix::SetMatrix()
@@ -247,7 +270,7 @@ double Matrix::PowerMethod(Vector* res,Vector * Eigenvector = NULL)
 	int N = 100;
 	int n = this->row;
 	double TOL = 0.00001;
-	Vector* res = new Vector(this->row);
+	res = new Vector(this->row);
 	Vector y;
 	if (Eigenvector == NULL) {
 		res = Eigenvector;
@@ -350,20 +373,20 @@ Vector Matrix::LinearEquationIterativeMethod(Vector & b)
 
 // void GaussElimination(double a[MaxRowNumber][MaxColumnNumber], int row, int column)
 // 矩阵现在只能求一范数和无穷范数
-double Matrix::GetNorm(int p)
-{
-	// 无穷范数
-	if (p == 0) {
-
-		return 0.0;
-	}
-
-	// 一范数
-	else if (p == 1) {
-
-		return 0.0;
-	}
-}
+//double Matrix::GetNorm(int p)
+//{
+//	// 无穷范数
+//	if (p == 0) {
+//
+//		return 0.0;
+//	}
+//
+//	// 一范数
+//	else if (p == 1) {
+//
+//		return 0.0;
+//	}
+//}
 
 int Matrix::GetRow()
 {

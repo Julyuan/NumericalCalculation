@@ -9,10 +9,10 @@
 
 int main(int argc, char** argv) {
 
-//	TestMatrix();
+	TestMatrix();
 //	TestPolyAux();
 //	TestPolynomial();
-	TestPoint();
+//	TestPoint();
 	system("pause");
 	return 0;
 }

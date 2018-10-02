@@ -25,6 +25,7 @@ public:
 	Matrix(Matrix &other);	// 拷贝构造函数
 	Matrix(int row, int column);	// 确定矩阵行数列数的构造函数
 
+	double MaxElement(int mode = 0);	//获取矩阵中最大的元素，mode = 0代表绝对值，否则是非绝对值
 	// 矩阵的构造函数
 	~Matrix();
 
@@ -47,7 +48,7 @@ public:
 	void CopyToArray(double** mat);
 
 	// 计算矩阵的范数
-	double GetNorm(int p);
+	double GetNorm(int p = 0);
 	
 	// 获得矩阵的行数
 	int GetRow();
