@@ -39,8 +39,7 @@ public:
 	static double** MatrixJoin(Matrix& a, Vector& b);
 
 	// 生成一个行数、列数特定的二维数组
-	static double** NewMatrix(int row, int column);
-
+	static double** NewMatrix(int row, int column);	
 	// 删除一个二维数组
 	static void DeleteMatrix(int row,  double** mat);
 	
@@ -75,7 +74,7 @@ public:
 	double PowerMethod(Vector*res, Vector* Eigenvector);
 
 	// 求解线性方程组，有两种方法
-	Vector LinearEquation(Vector& b, int mode);
+	Vector LinearEquation(Vector& b, int mode = 0);
 	Vector LinearEquationDirectMethod(Vector& b);
 	Vector LinearEquationIterativeMethod(Vector& b);
 	

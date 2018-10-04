@@ -79,9 +79,17 @@ double ** Matrix::MatrixJoin(Matrix & a, Vector & b)
 		double** res = NewMatrix(res_row, res_column);
 		for (int i = 0; i < res_row; i++) {
 			for (int j = 0; j < res_column; j++) {
-				res[i][j] = j == res_column - 1 ? b[j] : a[i][j];
+				res[i][j] = j == res_column - 1 ? b.vec[i] : a[i][j];
 			}
 		}
+
+		for (int i = 0; i < res_row; i++) {
+			for (int j = 0; j < res_column; j++) {
+				std::cout << res[i][j] << " ";
+			}
+			std::cout << std::endl;
+		}
+		return res;
 	}
 
 }
@@ -304,8 +312,10 @@ double Matrix::PowerMethod(Vector* res,Vector * Eigenvector = NULL)
 }
 
 // 线性方程组求解方法
-Vector Matrix::LinearEquation(Vector & b, int mode = 0)
+Vector Matrix::LinearEquation(Vector & b, int mode)
 {
+//	std::cout << "打印b向量" << std::endl;
+	b.PrintVector();
 	if (mode == 0) {
 		return LinearEquationDirectMethod(b);
 	}
@@ -326,11 +336,13 @@ Vector Matrix::LinearEquationDirectMethod(Vector & b)
 	GaussElimination(mat, this->GetRow(), this->GetColumn() + 1);
 	res.vec[n - 1] = mat[n - 1][n] / mat[n - 1][n - 1];
 	for (int i = n - 2; i >= 0; i--) {
-		double sum = 0;
+		double sum = 0.0;
 		for (int j = i + 1; j < n; j++) {
-			sum += mat[i][j] * b.vec[j];
+			sum += mat[i][j] * res.vec[j];
 		}
+		std::cout << "sum = " << sum << std::endl;
 		res.vec[i] = (mat[i][n] - sum) / mat[i][i];
+		std::cout << res.vec[i] << std::endl;
 	}
 	return res;
 }

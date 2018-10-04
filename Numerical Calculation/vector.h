@@ -28,6 +28,8 @@ public:
 	void SetAllElementsZero();
 	// 向量点积
 	double dot(const Vector& other);
+	// 向量打印
+	void PrintVector();
 
 	// 关于向量的运算符重载
 	Vector operator-();

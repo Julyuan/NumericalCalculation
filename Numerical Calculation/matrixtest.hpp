@@ -23,6 +23,22 @@ void TestMatrix(){
 	std::cout << "矩阵范数测试" << std::endl;
 	std::cout << "矩阵的1范数:" << d.GetNorm(1)<< std::endl;
 	std::cout << "矩阵的无穷范数" << d.GetNorm()<< std::endl;
+
+
+	std::cout << "矩阵直接解方程测试" << std::endl;
+	e.SetMatrix("[1 1 0 3;2 1 -1 1;3 -1 -1 2;-1 2 3 -1]");
+	double jly[4];
+	jly[0] = 4;
+	jly[1] = 1;
+	jly[2] = -3;
+	jly[3] = 4;
+	Vector va(jly,4), vb;
+	va.PrintVector();
+	vb = e.LinearEquation(va);
+	vb.PrintVector();
+	std::cout << "L, U矩阵解方程测试" << std::endl;
+
+	std::cout << "矩阵迭代解方程测试" << std::endl;
 //	std::cout << a[0][0] << std::endl;
 	//std::cout << std::endl;
 	//b.SetMatrix("[1,1,1;1,1,1;1,1,1]");

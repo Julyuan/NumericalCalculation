@@ -74,6 +74,19 @@ double Vector::dot(const Vector & other)
 	return ans;
 }
 
+void Vector::PrintVector()
+{
+	std::cout << "[";
+	for (int i = 0; i < this->dimension; i++) {
+		if (i != dimension - 1)
+			std::cout << vec[i] << " ,";
+		else
+			std::cout << vec[i];
+	}
+	std::cout << "]" << std::endl;
+
+}
+
 Vector Vector::operator-()
 {
 	Vector res(*this);

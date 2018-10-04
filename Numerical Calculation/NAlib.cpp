@@ -395,13 +395,13 @@ int GaussElimination(double** a, int row, int column)
 		return FALSE;
 	}
 
-	//printf("结果矩阵:\n");
-	//for (i = 0; i < row; i++) {
-	//	for (j = 0; j < column; j++) {
-	//		printf("%lf ", a[i][j]);
-	//	}
-	//	printf("\n");
-	//}
+	printf("结果矩阵:\n");
+	for (i = 0; i < row; i++) {
+		for (j = 0; j < column; j++) {
+			printf("%lf ", a[i][j]);
+		}
+		printf("\n");
+	}
 	return TRUE;
 }
 
@@ -452,6 +452,21 @@ int GaussJordanMethod(double** a, int row, int column) {
 	//}
 
 	return TRUE;
+}
+
+int BackwardSubstitutionProcess(double ** a, double * b, int n)
+{
+	b[n - 1] = a[n - 1][n] / a[n - 1][n - 1];
+	for (int i = n - 2; i >= 0; i--) {
+		double sum = 0.0;
+		for (int j = i + 1; j < n; j++) {
+			sum += a[i][j] * b[j];
+		}
+		//std::cout << "sum = " << sum << std::endl;
+		b[i] = (a[i][n] - sum) / a[i][i];
+		//std::cout << res.vec[i] << std::endl;
+	}
+	return 0;
 }
 
 bool IsZero(double a)
