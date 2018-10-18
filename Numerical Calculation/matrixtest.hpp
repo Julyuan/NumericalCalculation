@@ -4,7 +4,7 @@
 #include "matrix.h"
 
 void TestMatrix(){
-	Matrix a,b, c,d,e,f;
+	Matrix a,b, c,d,e,f,g;
 	std::cout << "´òÓ¡¾ØÕó²âÊÔ" << std::endl;
 	a.SetMatrix("[1 1 0 3;2 1 -1 1;3 -1 -1 2;-1 2 3 -1]");
 	a.PrintMatrix();
@@ -37,8 +37,17 @@ void TestMatrix(){
 	vb = e.LinearEquation(va);
 	vb.PrintVector();
 	std::cout << "L, U¾ØÕó½â·½³Ì²âÊÔ" << std::endl;
+	f.SetMatrix("[1 1 0 3;2 1 -1 1;3 -1 -1 2;-1 2 3 -1]");
+	f.LUFactorization(0).PrintMatrix();
+	f.LUFactorization(1).PrintMatrix();
 
 	std::cout << "¾ØÕóµü´ú½â·½³Ì²âÊÔ" << std::endl;
+
+	g.SetMatrix("[10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8]");
+	//Vector temp(6,25,-11,15);
+	
+	//g.LinearEquationIterativeMethod(temp);
+
 //	std::cout << a[0][0] << std::endl;
 	//std::cout << std::endl;
 	//b.SetMatrix("[1,1,1;1,1,1;1,1,1]");
