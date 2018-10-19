@@ -32,6 +32,36 @@ double Vector::Norm(int dim)
 	
 }
 
+double * Vector::NewVector(int dimension)
+{
+	if (dimension <= 0) {
+		std::cout << "向量维数出错，请仔细检查" << std::endl;
+		return nullptr;
+	}
+	else {
+		return new double[dimension];
+	}
+}
+
+void Vector::DeleteVector(double * vec)
+{
+	if (vec == nullptr) {
+		std::cout << "释放无效的空指针" << std::endl;
+	}
+	else {
+		delete[]vec;
+	}
+}
+
+void Vector::SetVector(std::initializer_list<double> lis)
+{
+	int count = 0;
+	this->vec = new double[lis.size()];
+	for (auto iter : lis) {
+		vec[count++] = iter;
+	}
+}
+
 Vector::Vector(double a[], int dim) {
 	dimension = dim;
 	vec = new double[dimension];
@@ -50,7 +80,58 @@ Vector::Vector(Vector& other) {
 
 Vector::Vector(char * str)
 {
-	
+	std::vector<double> temp;
+	int length = strlen(str);
+	bool flag;
+	int ndim, dim;
+
+	ndim = 0;
+	flag = false;
+	int* len = new int;
+	for (int i = 0; i<length; i++) {
+		if (str[i] <= '9' && str[i] >= '0' || str[i] == '-') {
+			ndim += 1;
+			double num = str[i] == '-' ? ReadNumber(&(str[i + 1]), len) : ReadNumber(&(str[i]), len);
+			i += *len;
+			if (str[i] == '-') {
+				i++;
+				num *= -1;
+			}
+			temp.push_back(num);
+			continue;
+		}
+		//else if (str[i] == ';') {
+		//	nrow += 1;
+		//	//	printf("ncol = %d\n", ncol);
+
+		//	if (flag == false) {
+		//		flag = true;
+		//		this->column = ncol;
+		//	}
+		//	else if (ncol != this->column) {
+		//		std::cout << "你的矩阵好像有、问题，每一行的数目不一样" << std::endl;
+		//		return;
+		//	}
+		//	ncol = 0;
+		//}
+		else if (str[i] == ')') {
+			break;
+		}
+	}
+
+	dim = ndim;
+	vec = NewVector(dim);
+	for (int i = 0; i < dim; i++)
+	{
+		vec[i] = temp[i];
+	}
+
+	delete len;
+}
+
+Vector::Vector(std::initializer_list<double> lis)
+{
+	SetVector(lis);
 }
 
 void Vector::SetAllElementsZero()

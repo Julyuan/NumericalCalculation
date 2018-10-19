@@ -1,5 +1,7 @@
 #pragma once
 #include"NAlib.h"
+#include<vector>
+#include<initializer_list>
 
 // 自定义向量类
 class Vector {
@@ -14,11 +16,15 @@ public:
 	Vector(double a[], int dim);
 	Vector(Vector& other);
 	Vector(char* str);
+	Vector(std::initializer_list<double>lis);
 	Vector(int dim);
 
 	// 向量范数求解
 	double Norm(int dimension);
 
+	double* NewVector(int dimension);
+	void DeleteVector(double* vec);
+	void SetVector(std::initializer_list<double>lis);
 	// 向量析构函数
 	~Vector() {
 		delete[] vec;

@@ -97,6 +97,10 @@ double ** Matrix::MatrixJoin(Matrix & a, Vector & b)
 
 double ** Matrix::NewMatrix(int row, int column)
 {
+	if (row <= 0 || column <= 0) {
+		std::cout << "行数和列数有一个小于零，请仔细检查" << std::endl;
+		return nullptr;
+	}
 	double** res;
 	res = new double*[row];
 	for (int i = 0; i<row; i++)
