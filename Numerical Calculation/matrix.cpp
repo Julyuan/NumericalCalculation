@@ -249,6 +249,21 @@ void Matrix::SetMatrix(char str[]){
 	delete len;
 }
 
+void Matrix::SetElement(int row, int column, double value)
+{
+	if (row < 0 || row >= this->GetRow()) {
+		std::cout << "row³ö´í" << std::endl;
+		return;
+	}
+	else if (column < 0 || column >= this->GetColumn()) {
+		std::cout << "column³ö´í" << std::endl;
+		return;
+	}
+	else {
+		this->mat[row][column] = value;
+	}
+}
+
 double Matrix::Determinant()
 {
 	if(this->row != this->column)

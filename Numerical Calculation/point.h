@@ -36,6 +36,7 @@ private:
 	
 public:
 	PointSet();
+	double SumOfPowerN(int n);
 	// 点排序（按照x坐标的大小）,为其他方法做铺垫
 	void Sort();
 	void Clear();
@@ -51,6 +52,8 @@ public:
 	double DividedDifference(int start, int rank);
 	// 牛顿插值
 	Vector NewtonInterpolatory();
-
+	// 最小二乘拟合
+	Vector LeastSquaresPolynomial(int degree);
+	// 打印所有的点
 	void PrintPointSet();
 };

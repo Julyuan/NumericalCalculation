@@ -67,6 +67,9 @@ public:
 	// 解析字符串设置矩阵
 	void SetMatrix(char str[]);
 	
+	// 矩阵单个元素的赋值
+	void SetElement(int row, int column, double value);
+
 	// 计算方阵的行列式
 	double Determinant();
 

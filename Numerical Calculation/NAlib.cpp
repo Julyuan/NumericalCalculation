@@ -505,3 +505,15 @@ int PolynomialConvertAuxiliary(double x[], bool vis[], int total, double * res, 
 	return 1;
 }
 
+int Binomial_Coefficient(int s, int k)
+{
+	if (2*k > s)
+		k = s - k;
+	int res = 1;
+	for (int i = 1; i <= k; i++) {
+		res *= (s-i+1);
+		res /= i;
+	}
+	return res;
+}
+

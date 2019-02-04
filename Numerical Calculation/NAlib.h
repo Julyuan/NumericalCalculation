@@ -62,5 +62,6 @@ bool IsOne(double a);
 //多项式转化的辅助函数
 int PolynomialConvertAuxiliary(double x[], bool vis[], int total, double* res, int n, int current, int guard);
 
+int Binomial_Coefficient(int s, int k);
 
 #endif

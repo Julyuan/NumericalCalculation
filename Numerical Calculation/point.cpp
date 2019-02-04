@@ -59,6 +59,15 @@ PointSet::PointSet()
 	number = 0;
 }
 
+double PointSet::SumOfPowerN(int n)
+{
+	double res = 0.0;
+	for (int i = 0; i < this->number; i++) {
+		res += pow(pointSet[i].GetX(), (double)n);
+	}
+	return res;
+}
+
 void PointSet::Sort()
 {
 	std::sort(pointSet.begin(), pointSet.end());
@@ -167,7 +176,47 @@ double PointSet::DividedDifference(int start, int rank)
 
 Vector PointSet::NewtonInterpolatory()
 {
-	return Vector();
+	double** F = Matrix::NewMatrix(this->number,this->number);
+	for (int i = 0; i < this->number; i++) {
+		F[i][0] = pointSet[i].GetY();
+	}
+
+	for (int i = 1; i < this->number; i++) {
+		for (int j = 1; j < this->number; j++) {
+			F[i][j] = (F[i][j - 1] - F[i - 1][j - 1]) / (pointSet[i].GetX() - pointSet[i - j].GetX());
+		}
+	}
+	Vector res;
+	for (int i = 0; i < this->number; i++) {
+		res.vec[i] = F[i][i];
+	}
+	Matrix::DeleteMatrix(this->number, F);
+	return res;
+}
+
+Vector PointSet::LeastSquaresPolynomial(int degree)
+{
+	if (degree >= this->number) {
+		std::cout << "阶数过高，拟合出错"<< std::endl;
+		return Vector();
+	}
+	else {
+		Matrix* mat = new Matrix(this->number, this->number);
+		for (int i = 0; i < this->number; i++) {
+			for (int j = 0; j < this->number; j++) {
+				mat->SetElement(i, j, this->SumOfPowerN(i + j));
+			}
+		}
+		Vector vec;
+		for (int i = 0; i < degree; i++) {
+			double v = 0.0;
+			for (int j = 0; j < this->number; j++)
+				v += pointSet[j].GetY()*pow(pointSet[j].GetX(), i);
+			vec.vec[i] = v;
+		}
+		Vector res = mat->LinearEquationDirectMethod(vec);
+		return res;
+	}
 }
 
 void PointSet::PrintPointSet()
